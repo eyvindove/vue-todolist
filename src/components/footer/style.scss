@@ -1,0 +1,15 @@
+.footer__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+
+  &__text {
+    padding: .5rem 0;
+    width: 100%;
+    color: #333;
+    text-align: center;
+    font-size: .75rem;
+  }
+}

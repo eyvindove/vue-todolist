@@ -1,0 +1,16 @@
+.about {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 16px;
+  padding: 16px;
+  background-color: #eee;
+  border-radius: .5rem;
+  box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .3);
+}
+
+.title {
+  padding: 2rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+* {
+  font-family: 'Comic Neue', cursive;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  padding: .5rem;
+
+  &__button {
+    padding: .25rem 1rem;
+    background-color: #ddd;
+    border-radius: .5rem;
+    color: #333;
+    font-size: 1rem;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  * {
+    font-size: 12px;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .3s ease-in-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.flip-list-enter-active,
+.flip-list-leave-active {
+  transition: all .5s ease-in-out;
+}
+
+.flip-list-enter,
+.flip-list-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.flip-list-move {
+  transition: transform 1s;
+}
