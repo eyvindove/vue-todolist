@@ -11,8 +11,8 @@ export default new Vuex.Store({
         1: Completed
     */
     contentList: [
-      { id: 0, status: 0, text: 'Planing Meeting' },
-      { id: 1, status: 0, text: '買禮物' },
+      { id: 0, status: 0, text: 'Planning Meeting' },
+      { id: 1, status: 0, text: '買500元內交換禮物' },
       { id: 2, status: 1, text: 'Have a good dream' },
     ],
   },

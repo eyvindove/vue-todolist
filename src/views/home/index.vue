@@ -42,6 +42,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import Store from '@/store'
 import HomeFooter from '@/components/footer'
 
 export default {
@@ -88,11 +89,18 @@ export default {
   },
 
   created () {
+    this.checkLocalStorage()
     this.filterContentList()
     this.checkNextId()
   },
 
   methods: {
+    checkLocalStorage () {
+      let existed = JSON.parse(window.localStorage.getItem('vue-todo-list:content'))
+      console.log('existed', existed)
+      if (existed) Store.commit('SET_CONTENT_LIST', existed)
+    },
+
     checkNextId () {
       if (!this.contentList.length) return
       for (let item of this.contentList) this.nextId = this.nextId < item.id && item.id || this.nextId
@@ -105,16 +113,17 @@ export default {
 
     filterContentList () {
       this.showContentList = this.activeTab === 2 ? this.contentList : this.contentList.filter(item => item.status === this.activeTab)
+      window.localStorage.setItem('vue-todo-list:content', JSON.stringify(this.contentList))
     },
 
     deleteContent (deleteId) {
-      this.$store.commit('SET_CONTENT_LIST', this.contentList.filter(item => item.id !== deleteId))
+      Store.commit('SET_CONTENT_LIST', this.contentList.filter(item => item.id !== deleteId))
       this.filterContentList()
     },
 
     toggleStatus (toggleId) {
       for (let item of this.contentList) if (item.id === toggleId) item.status = item.status ? 0 : 1
-      this.$store.commit('SET_CONTENT_LIST', this.contentList)
+      Store.commit('SET_CONTENT_LIST', this.contentList)
       this.filterContentList()
     },
 
@@ -125,7 +134,8 @@ export default {
         status: 0,
         text: this.inputNewTask,
       }
-      this.$store.commit('SET_CONTENT_LIST', [ newTask, ...this.contentList ])
+
+      Store.commit('SET_CONTENT_LIST', [ newTask, ...this.contentList ])
       this.inputNewTask = ''
       this.nextId++
     },
