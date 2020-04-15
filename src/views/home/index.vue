@@ -5,7 +5,7 @@
       .input
         input.input__input(
           type="text"
-          placeholder="Add new task..."
+          placeholder="Add new todo task..."
           v-model="inputNewTask"
           v-focus
           @keyup.enter="addNewTask()"
@@ -19,7 +19,7 @@
         )
           .tab__item__label {{ item.label }}
       .list
-        .list__empty(v-if="!contentListLength")
+        .list__empty(v-if="!showContentListLength")
           .list__empty__icon
           .list__empty__text This {{ emptyText }} list is empty...
         template(v-else)
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Store from '@/store'
 import HomeFooter from '@/components/footer'
 
@@ -60,7 +60,6 @@ export default {
       { id: 1, label: 'Completed' },
     ],
     activeTab: 2,
-    showContentList: [],
     inputNewTask: '',
     nextId: 0,
   }),
@@ -69,35 +68,45 @@ export default {
     ...mapState([
       'contentList',
     ]),
-    
-    upperCaseTitle: function () {
-      return this.title.toUpperCase()
-    },
 
-    contentListLength: function () {
-      return this.showContentList.length
+    ...mapGetters([
+      'filterAllList',
+      'filterTodoList',
+      'filterCompletedList',
+    ]),
+    
+    upperCaseTitle () {
+      return this.title.toUpperCase()
     },
 
     emptyText () {
       return this.tabList.find(item => item.id === this.activeTab).label
     },
+
+    showContentList () {
+      return this.activeTab === 0 ? this.filterTodoList :
+        this.activeTab === 1 ? this.filterCompletedList :
+        this.filterAllList
+    },
+
+    showContentListLength () {
+      return this.showContentList.length
+    },
   },
 
   watch: {
-    'activeTab': 'filterContentList',
-    'contentList': 'filterContentList',
+    'contentList': 'setItemToLocalStorage',
   },
 
   created () {
     this.checkLocalStorage()
-    this.filterContentList()
+    this.setItemToLocalStorage()
     this.checkNextId()
   },
 
   methods: {
     checkLocalStorage () {
       let existed = JSON.parse(window.localStorage.getItem('vue-todo-list:content'))
-      console.log('existed', existed)
       if (existed) Store.commit('SET_CONTENT_LIST', existed)
     },
 
@@ -111,20 +120,19 @@ export default {
       this.activeTab = selectedId
     },
 
-    filterContentList () {
-      this.showContentList = this.activeTab === 2 ? this.contentList : this.contentList.filter(item => item.status === this.activeTab)
+    setItemToLocalStorage () {
       window.localStorage.setItem('vue-todo-list:content', JSON.stringify(this.contentList))
     },
 
     deleteContent (deleteId) {
       Store.commit('SET_CONTENT_LIST', this.contentList.filter(item => item.id !== deleteId))
-      this.filterContentList()
+      this.setItemToLocalStorage()
     },
 
     toggleStatus (toggleId) {
       for (let item of this.contentList) if (item.id === toggleId) item.status = item.status ? 0 : 1
       Store.commit('SET_CONTENT_LIST', this.contentList)
-      this.filterContentList()
+      this.setItemToLocalStorage()
     },
 
     addNewTask () {
