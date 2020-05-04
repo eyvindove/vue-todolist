@@ -33,7 +33,9 @@
               .list__item__check
                 .list__item__check__box
               .list__item__text {{ item.text }}
-              .list__item__delete(@click="deleteContent(item.id)")
+              .list__item__edit(@click.stop="editItemById(item.id)")
+                .list__item__edit__icon
+              .list__item__delete(@click.stop="deleteContent(item.id)")
                 .list__item__delete__icon
     .nav
       router-link.nav__button(to='/about') About TodoList
@@ -74,7 +76,7 @@ export default {
       'filterTodoList',
       'filterCompletedList',
     ]),
-    
+
     upperCaseTitle () {
       return this.title.toUpperCase()
     },
@@ -122,6 +124,12 @@ export default {
 
     setItemToLocalStorage () {
       window.localStorage.setItem('vue-todo-list:content', JSON.stringify(this.contentList))
+    },
+
+    editItemById (editId) {
+      let target = this.contentList.find(item => item.id === editId)
+      Store.commit('SET_EDIT_ITEM', target)
+      Store.commit('TOGGLE_POPUP_EDIT', true)
     },
 
     deleteContent (deleteId) {

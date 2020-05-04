@@ -1,0 +1,66 @@
+@import '@/assets/scss/generic';
+
+.popup {
+  z-index: index($z-index, popup);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: transparent;
+  border-radius: $radius;
+  box-shadow: 3px 3px 5px 0 rgba($dark, .3);
+  transform: translateX(-50%) translateY(-50%);
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    width: 50vw;
+    background-color: $bg-light;
+    border-radius: $radius;
+
+    &__input {
+      margin: 0 auto;
+      padding: .5rem 1rem;
+      width: calc(100% - 2rem);
+      height: 1rem;
+      border: 2px solid darkcyan;
+      border-radius: $radius / 2;
+      outline: none;
+    }
+
+    &__prompt {
+      margin-top: .5rem;
+      font-size: 12px;
+      color: darkred;
+    }
+
+    &__button {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+
+      &__confirm,
+      &__cancel {
+        flex: 0 0 45%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2rem;
+        border-radius: $radius;
+        cursor: pointer;
+      }
+
+      &__confirm {
+        color: #eee;
+        background-color: darkcyan;
+      }
+
+      &__cancel {
+        margin-left: 1rem;
+        color: #eee;
+        background-color: #555;
+      }
+    }
+  }
+}

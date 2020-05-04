@@ -1,3 +1,5 @@
+@import './color';
+@import './variable';
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 * {
@@ -12,8 +14,19 @@ body {
 }
 
 .app {
+  position: relative;
   margin: 0 auto;
   max-width: 900px;
+
+  &__mask {
+    z-index: index($z-index, fixed);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(#000, .7);
+  }
 }
 
 .nav {
@@ -24,7 +37,7 @@ body {
   &__button {
     padding: .25rem 1rem;
     background-color: #ddd;
-    border-radius: .5rem;
+    border-radius: $radius;
     color: #333;
     font-size: 1rem;
     transition: all .3s ease-in-out;

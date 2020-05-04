@@ -1,3 +1,5 @@
+@import "@/assets/scss/generic";
+
 .about {
   display: flex;
   flex-flow: column nowrap;
@@ -5,8 +7,8 @@
   margin: 16px;
   padding: 16px;
   background-color: #eee;
-  border-radius: .5rem;
-  box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .3);
+  border-radius: $radius;
+  box-shadow: 3px 3px 5px 0 rgba($dark, .3);
 }
 
 .title {

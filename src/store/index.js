@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    /* 
+    /*
       status
         0: To do
         1: Completed
@@ -15,19 +15,33 @@ export default new Vuex.Store({
       { id: 1, status: 0, text: '買500元內交換禮物' },
       { id: 2, status: 1, text: 'Have a good dream' },
     ],
+    isPopupEditOpen: false,
+    editItem: {},
   },
+
   getters: {
     filterAllList: state => state.contentList,
     filterTodoList: state => state.contentList.filter(item => item.status === 0),
     filterCompletedList: state => state.contentList.filter(item => item.status === 1),
   },
+
   mutations: {
     SET_CONTENT_LIST (state, payload) {
       state.contentList = payload
     },
+
+    TOGGLE_POPUP_EDIT (state, payload) {
+      state.isPopupEditOpen = payload
+    },
+
+    SET_EDIT_ITEM (state, payload) {
+      state.editItem = payload
+    }
   },
+
   actions: {
   },
+
   modules: {
   }
 })

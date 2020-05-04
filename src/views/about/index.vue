@@ -7,10 +7,23 @@
     .ref
       p Icons is made by
         | &nbsp;
-        a(href="https://www.flaticon.com/authors/freepik" title="Freepik") Freepik
-        | &nbsp;from 
-        a(href="https://www.flaticon.com/" title="Flaticon") www.flaticon.com
-    
+        a(
+          href="https://www.flaticon.com/authors/freepik"
+          title="Freepik"
+          target="_blank"
+        ) Freepik &
+        a(
+          href="https://www.flaticon.com/authors/those-icons"
+          title="Those Icons"
+          target="_blank"
+        ) Those Icons
+        | &nbsp;from
+        a(
+          href="https://www.flaticon.com/"
+          title="Flaticon"
+          target="_blank"
+        ) www.flaticon.com
+
     nav.nav
       router-link(to='/').nav__button Back To Home
     home-footer
