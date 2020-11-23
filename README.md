@@ -1,6 +1,6 @@
 # Vue Todo List
 
-Build up a simple Todo List by `Vue CLI`, `Vuex`, `Vue Router`, use `Pug`, `Babel` and `Sass`.
+Build up a simple Todo List by `Vue CLI` with `Vuex`, `Vue Router`, use `Pug`, `Babel` and `Sass`.
 
 The list contents would be stored in local storage.
 

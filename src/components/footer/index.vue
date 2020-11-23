@@ -1,7 +1,7 @@
 <template lang="pug">
   footer.footer__content
     .footer__content__about
-    .footer__content__text Copyright &copy; {{ currentYear }} Eyvindove, All Rights Reserved
+    .footer__content__text Copyright &copy; {{ currentYear }} Eyvindove Reserved
 </template>
 
 <script>

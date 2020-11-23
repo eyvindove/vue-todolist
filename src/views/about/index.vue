@@ -3,7 +3,6 @@
     .title About TodoList
     .content
       .content__description {{ content.description }}
-
     .ref
       p Icons is made by
         | &nbsp;
@@ -23,7 +22,6 @@
           title="Flaticon"
           target="_blank"
         ) www.flaticon.com
-
     nav.nav
       router-link(to='/').nav__button Back To Home
     home-footer
@@ -41,7 +39,7 @@ export default {
 
   data: () => ({
     content: {
-      description: 'This TodoList is created by Vue CLI, used Vue.js Vuex, Vue Router etc. related technologies.',
+      description: 'This TodoList is created by Vue CLI, used Vue.js and Vuex, Vue Router etc. related ecosystems.',
     },
   }),
 }

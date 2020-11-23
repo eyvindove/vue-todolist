@@ -1,10 +1,10 @@
 <template lang="pug">
   .app
     transition(name="fade" mode="out-in")
+      router-view.app-container
+    transition(name="fade" mode="out-in")
       .app__mask(v-if="isPopupEditOpen")
         popup-edit
-    transition(name="fade" mode="out-in")
-      router-view
 </template>
 
 <script>

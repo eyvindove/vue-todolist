@@ -6,16 +6,20 @@
   font-family: 'Comic Neue', cursive;
   text-decoration: none;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 .app {
   position: relative;
   margin: 0 auto;
+  padding: 1rem;
   max-width: 900px;
 
   &__mask {
@@ -27,6 +31,13 @@ body {
     left: 0;
     background-color: rgba(#000, .7);
   }
+}
+
+.app-container {
+  padding: 1rem;
+  background-color: $bg-page;
+  border-radius: $radius;
+  box-shadow: 3px 3px 5px 0 rgba($dark, .3);
 }
 
 .nav {
@@ -64,9 +75,20 @@ body {
   opacity: 0;
 }
 
+.fade-in-down-enter-active,
+.fade-in-down-leave-active {
+  transition: all .3s ease-in-out;
+}
+
+.fade-in-down-enter,
+.fade-in-down-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
 .flip-list-enter-active,
 .flip-list-leave-active {
-  transition: all .5s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .flip-list-enter,

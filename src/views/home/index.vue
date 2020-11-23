@@ -18,7 +18,10 @@
           @click="toggleActiveTab(item.id)"
         )
           .tab__item__label {{ item.label }}
-      .list
+      .list(
+        ref="refList"
+        :style="{ 'max-height': `${listMaxHeight}px` }"
+      )
         .list__empty(v-if="!showContentListLength")
           .list__empty__icon
           .list__empty__text This {{ emptyText }} list is empty...
@@ -37,6 +40,11 @@
                 .list__item__edit__icon
               .list__item__delete(@click.stop="deleteContent(item.id)")
                 .list__item__delete__icon
+          transition(name="fade-in-down")
+            .list__completed--remove(
+              v-if="showRemoveCompleted"
+              @click="removeCompletedItems"
+            ) Remove Completed Items
     .nav
       router-link.nav__button(to='/about') About TodoList
     home-footer
@@ -64,6 +72,7 @@ export default {
     activeTab: 2,
     inputNewTask: '',
     nextId: 0,
+    listMaxHeight: 0,
   }),
 
   computed: {
@@ -94,6 +103,10 @@ export default {
     showContentListLength () {
       return this.showContentList.length
     },
+
+    showRemoveCompleted () {
+      return this.activeTab === 1 && this.showContentListLength
+    },
   },
 
   watch: {
@@ -104,6 +117,14 @@ export default {
     this.checkLocalStorage()
     this.setItemToLocalStorage()
     this.checkNextId()
+  },
+
+  mounted () {
+    this.computeListMaxHeight()
+
+    window.onresize = () => {
+      this.computeListMaxHeight()
+    }
   },
 
   methods: {
@@ -154,6 +175,16 @@ export default {
       Store.commit('SET_CONTENT_LIST', [ newTask, ...this.contentList ])
       this.inputNewTask = ''
       this.nextId++
+    },
+
+    computeListMaxHeight () {
+      let list = this.$refs.refList.offsetTop
+      let bodyClientHeight = document.body.clientHeight
+      this.listMaxHeight = parseInt(bodyClientHeight - list - 122)
+    },
+
+    removeCompletedItems () {
+      Store.commit('SET_CONTENT_LIST', this.contentList.filter(item => item.status !== 1))
     },
   },
 }
